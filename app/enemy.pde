@@ -1,14 +1,19 @@
-enemy(int HP, int bulletSpeed, int weapon, int ap, int speed, int size)
+int size;
+PImage img;
+
+enemy(int HP, int bulletSpeed, int weapon, int ap, int speed, int size, int x, int y)
 {
-    super(HP, bulletSpeed, weapon, ap, speed, size);
+    super(HP, bulletSpeed, weapon, ap, speed, size, x, y);
+    this.size = size;
+    this.img = loadImage("enemy.png");
 }
 
-walk()
+void walk()
 {
-
+    this.x += this.speed;
+    image(enemy, this.x, this.y, this.size, this.size);
 }
 
-attack()
-{
-    
-}
+void attack()
+{}
+
