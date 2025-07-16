@@ -43,6 +43,7 @@ class enemy extends charactor {
     if (target.isHit(b)) {
       target.HP -= 10;
       println("Enemy hit! HP: " + target.HP);
+      stageCount = 1;
       bullets.remove(i);
       continue;
     }

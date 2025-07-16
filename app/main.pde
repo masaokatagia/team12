@@ -1,7 +1,8 @@
 Stage stage;
 Player player;
 public enemy enemy1;
-Boss boss;
+public Boss boss;
+public int stageCount= 0;
 PImage enemyBulletImg;
 PImage jikiBulletImg;
 
@@ -35,5 +36,10 @@ void draw() {
   enemy1.attack();
   enemy1.updateBullets();
   enemy1.display();
+  if (stageCount == 1) {
+    boss.walk();
+  boss.attack();
+  boss.display();
+  }
 
 }
