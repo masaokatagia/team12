@@ -24,6 +24,7 @@ void draw() {
 
   player.walk();
   player.display();
+  player.handleInput();
 
   enemy1.walk();
   enemy1.attack();

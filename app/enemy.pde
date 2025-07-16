@@ -4,7 +4,7 @@ class enemy extends charactor {
   PImage img;
   PImage bulletImg;
   ArrayList<Bullet> bullets;
-  int fireInterval = 60;  // 60フレームごと（1秒ごと）に発射
+  int fireInterval = 60;
   int lastShotFrame = 0;
 
   enemy(int x, int y, Player target, PImage bulletImg) {
@@ -38,6 +38,14 @@ class enemy extends charactor {
     for (int i = bullets.size() - 1; i >= 0; i--) {
       Bullet b = bullets.get(i);
       b.shoot();
+
+//      if (target.isHit(b)) {
+//        target.HP -= 10;
+//        println("Player hit! HP: " + target.HP);
+//        bullets.remove(i);
+//        continue;
+//     }
+
       if (b.isOffScreen()) {
         bullets.remove(i);
       }
@@ -49,5 +57,9 @@ class enemy extends charactor {
     for (Bullet b : bullets) {
       b.display();
     }
+  }
+
+  boolean isHit(Bullet b) {
+    return b.x > x && b.x < x + size && b.y > y && b.y < y + size;
   }
 }

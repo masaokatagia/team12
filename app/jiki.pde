@@ -3,6 +3,7 @@ class Player extends charactor {
 
   Player(int x, int y) {
     super(100, 6, 3, 15, 4, x, y);
+    loadIMG();
   }
 
   @Override
