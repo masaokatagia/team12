@@ -3,6 +3,7 @@ class Player extends charactor {
   PImage bulletImg;
   int size = 50;
   ArrayList<Bullet> bullets;
+  boolean isAttacking = false;
 
   Player(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y, PImage bulletImg) {
     super(HP, bulletSpeed, weapon, ap, speed, x, y);
@@ -54,10 +55,21 @@ class Player extends charactor {
   }
 
   void handleInput() {
-    if (keyPressed && key == ' ') {
-      attack();
+  if (keyPressed) {
+    if (key == 'a') x -= speed;
+    if (key == 'd') x += speed;
+    if (key == 'w') y -= speed;
+    if (key == 's') y += speed;
+    if (key == ' ') {
+      if (!isAttacking) {
+        attack();
+        isAttacking = true;
+      }
     }
+  } else {
+    isAttacking = false;
   }
+}
 
   void display() {
     if (img != null) {
