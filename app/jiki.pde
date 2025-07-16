@@ -1,7 +1,7 @@
-class Player extends GameCharacter {
+class Player extends charactor {
   PImage img;
 
-  Player(int x, int y) {
+  jiki(int x, int y) {
     super(100, 6, 3, 15, 4, x, y);
   }
 

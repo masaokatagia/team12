@@ -1,4 +1,4 @@
-class GameCharacter {
+class charactor {
     int HP;             // 体力
     int bulletSpeed;    // 弾の速度
     int weapon;         // 武器
@@ -7,7 +7,7 @@ class GameCharacter {
     int x;              // X座標
     int y;              // Y座標
 
-    GameCharacter(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y) {
+    Charactor(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y) {
         this.HP = HP;
         this.bulletSpeed = bulletSpeed;
         this.weapon = weapon;
