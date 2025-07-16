@@ -1,0 +1,162 @@
+// main.pde
+PImage jiki_img, enemy_img, middleBOSS_img, BOSS_img;
+jiki j;
+enemy e;
+BOSS b;
+bullet jb;
+
+void setup() {
+  size(800, 600);
+  j = new jiki(100, 10, 1, 20, 5, 100, 400, 500);
+  e = new enemy(50, 5, 1, 10, 3, 50, 300, 200);
+  b = new BOSS(200, 8, 2, 30, 2, 80, 500, 100);
+  jb = new bullet();
+
+}
+
+void draw() {
+  background(0);
+  j.walk();
+  j.attack();
+  e.walk();
+  e.attack();
+  b.walk();
+  b.attack();
+}
+
+// charactor.pde
+class charactor {
+  int HP, bulletSpeed, weapon, ap, speed, x, y;
+
+  charactor(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y) {
+    this.HP = HP;
+    this.bulletSpeed = bulletSpeed;
+    this.weapon = weapon;
+    this.ap = ap;
+    this.speed = speed;
+    this.x = x;
+    this.y = y;
+  }
+
+  void walk() {}
+  void attack() {}
+}
+
+// jiki.pde
+class jiki extends charactor {
+  enemy e;
+  BOSS b;
+  PImage img;
+
+  jiki(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y) {
+    super(HP, bulletSpeed, weapon, ap, speed, x, y);
+  }
+
+  void walk() {
+    if (keyPressed) {
+      if (keyCode == LEFT) x -= speed;
+      if (keyCode == RIGHT) x += speed;
+      if (keyCode == UP) y -= speed;
+      if (keyCode == DOWN) y += speed;
+    }
+    image(img, x, y, 50, 50);
+  }
+
+  void attack() {
+    // シンプルな攻撃処理（自弾）
+  }
+
+  void loadIMG() {
+    img = loadImage("jiki.png");
+  }
+
+  void jump() {
+    y -= 50; // 簡易ジャンプ
+  }
+}
+
+// enemy.pde
+class enemy extends charactor {
+  int size;
+  PImage img;
+  jiki j;
+
+  enemy(int HP, int bulletSpeed, int weapon, int ap, int speed, int size, int x, int y) {
+    super(HP, bulletSpeed, weapon, ap, speed, x, y);
+    this.size = size;
+  }
+
+  void loadIMG() {
+    img = loadImage("enemy.png");
+  }
+
+  void walk() {
+    x += speed;
+    image(img, x, y, size, size);
+  }
+
+  void attack() {
+    bullet b = new bullet();
+    b.shoot(x, y, 0, 5);
+  }
+}
+
+// BOSS.pde
+class BOSS extends charactor {
+  int size;
+  PImage img;
+  jiki j;
+
+  BOSS(int HP, int bulletSpeed, int weapon, int ap, int speed, int size, int x, int y) {
+    super(HP, bulletSpeed, weapon, ap, speed, x, y);
+    this.size = size;
+  }
+
+  void loadIMG() {
+    img = loadImage("BOSS.png");
+  }
+
+  void walk() {
+    y += sin(radians(frameCount)) * speed;
+    image(img, x, y, size, size);
+  }
+
+  void attack() {
+    bullet b = new bullet();
+    b.shoot(x, y, -5, 5);
+  }
+}
+
+// bullet.pde
+class bullet {
+  int speed, ap, x, y;
+
+  bullet() {}
+
+  bullet(int x, int y, int speed, int ap) {
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
+    this.ap = ap;
+  }
+
+  void shoot(int sx, int sy, int dx, int dy) {
+    x = sx;
+    y = sy;
+    speed = dy;
+    ellipse(x, y += speed, 5, 5);
+  }
+
+  boolean isHit(charactor c) {
+    return dist(x, y, c.x, c.y) < 20;
+  }
+}
+
+// CreateStage.pde
+class CreateStage {
+  int stageCount;
+
+  CreateStage() {
+    stageCount = 1;
+  }
+}
