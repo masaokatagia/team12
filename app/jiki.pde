@@ -1,5 +1,6 @@
 class Player extends charactor {
   PImage img;
+   boolean isAttacking = false; // 攻撃フラグ
 
   Player(int x, int y) {
     super(100, 6, 3, 15, 4, x, y);
@@ -24,7 +25,7 @@ class Player extends charactor {
     }
   }
 
-  void handleInput() {
+ void handleInput() {
     if (keyPressed) {
       if (key == 'a' || key == 'A') {
         x -= speed;
@@ -34,7 +35,15 @@ class Player extends charactor {
         y -= speed;
       } else if (key == 's' || key == 'S') {
         y += speed;
+      } else if (key == ' ') {
+        // スペースキーで攻撃
+        if (!isAttacking) {  // 押しっぱなし対策
+          attack();
+          isAttacking = true;
+        }
       }
+    } else {
+      isAttacking = false;
     }
   }
 }
