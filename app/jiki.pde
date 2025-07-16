@@ -1,14 +1,21 @@
 class Player extends charactor {
+  int size;
   PImage img;
-   boolean isAttacking = false; // 攻撃フラグ
+  ArrayList<Bullet> bullets;
+  boolean isAttacking = false; // 攻撃フラグ
+  PImage bulletImg;
 
-  Player(int x, int y) {
+  Player(int x, int y, PImage bulletImg) {
     super(100, 6, 3, 15, 4, x, y);
+    this.bulletImg = bulletImg;
+    this.size = 32;
+    bullets = new ArrayList<Bullet>();
     loadIMG();
   }
 
   @Override
   void attack() {
+    bullets.add(new Bullet(x + size / 2, y + size / 2, 3, bulletImg));
   }
 
   @Override

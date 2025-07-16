@@ -3,13 +3,16 @@ Player player;
 enemy enemy1;
 Boss boss;
 PImage enemyBulletImg;
+PImage jikiBulletImg;
 
 void setup() {
   size(800, 600);
   stage = new Stage("background.png", "obstacle.png");
+  
+  jikiBulletImg = loadImage("bullet1.png");
 
   // プレイヤー（仮）
-  player = new Player(400, 500);
+  player = new Player(400, 500, jikiBulletImg);
 
   // 弾画像の読み込み
   enemyBulletImg = loadImage("bullet1.png");
