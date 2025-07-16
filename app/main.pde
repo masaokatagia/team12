@@ -21,6 +21,7 @@ void setup() {
 
 void draw() {
   stage.drawBackstage();
+   stage.drawStage(); // 
 
   player.walk();
   player.display();
@@ -31,5 +32,4 @@ void draw() {
   enemy1.updateBullets();
   enemy1.display();
 
-  stage.drawStage(); // 障害物など前景の描画
 }
