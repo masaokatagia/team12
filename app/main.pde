@@ -1,6 +1,6 @@
 Stage stage;
 Player player;
-enemy enemy1;
+public enemy enemy1;
 Boss boss;
 PImage enemyBulletImg;
 PImage jikiBulletImg;
@@ -12,7 +12,7 @@ void setup() {
   jikiBulletImg = loadImage("bullet1.png");
 
   // プレイヤー（仮）
-  player = new Player(400, 500, jikiBulletImg);
+  player = new Player(100, 6, 3, 15, 4, 400, 500, jikiBulletImg);
 
   // 弾画像の読み込み
   enemyBulletImg = loadImage("bullet1.png");
@@ -29,6 +29,7 @@ void draw() {
   player.walk();
   player.display();
   player.handleInput();
+  player.updateBullets();
 
   enemy1.walk();
   enemy1.attack();

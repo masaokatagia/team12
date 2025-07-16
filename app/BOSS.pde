@@ -1,4 +1,4 @@
-class Boss extends charactor {
+ class Boss extends charactor {
   int size;
   Player target;
   PImage img;

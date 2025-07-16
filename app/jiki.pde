@@ -1,21 +1,42 @@
 class Player extends charactor {
-  int size;
   PImage img;
-  ArrayList<Bullet> bullets;
-  boolean isAttacking = false; // 攻撃フラグ
   PImage bulletImg;
+  int size = 50;
+  ArrayList<Bullet> bullets;
 
-  Player(int x, int y, PImage bulletImg) {
-    super(100, 6, 3, 15, 4, x, y);
+  Player(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y, PImage bulletImg) {
+    super(HP, bulletSpeed, weapon, ap, speed, x, y);
     this.bulletImg = bulletImg;
-    this.size = 32;
-    bullets = new ArrayList<Bullet>();
+    this.bullets = new ArrayList<Bullet>();
     loadIMG();
   }
 
   @Override
   void attack() {
-    bullets.add(new Bullet(x + size / 2, y + size / 2, 3, bulletImg));
+    // 上方向に発射（y軸マイナス）
+    bullets.add(new Bullet(x + size / 2, y, -bulletSpeed, bulletImg));
+  }
+
+  void updateBullets() {
+    for (int i = bullets.size() - 1; i >= 0; i--) {
+      Bullet b = bullets.get(i);
+      b.shoot();
+      if (b.isOffScreen()) {
+        bullets.remove(i);
+      }
+      if (enemy1.isHit(b)) {
+        enemy1.HP -= 10;
+       println("Player hit! HP: " + enemy1.HP);
+        bullets.remove(i);
+        continue;
+     }
+    }
+  }
+
+  void displayBullets() {
+    for (Bullet b : bullets) {
+      b.display();
+    }
   }
 
   @Override
@@ -23,34 +44,32 @@ class Player extends charactor {
     img = loadImage("yuusya.png");
   }
 
-  void display() {
-    if (img != null) {
-      image(img, x, y);
-    } else {
-      fill(0, 255, 0);
-      rect(x, y, 50, 50);
+  void walk() {
+    if (keyPressed) {
+      if (key == 'a') x -= speed;
+      if (key == 'd') x += speed;
+      if (key == 'w') y -= speed;
+      if (key == 's') y += speed;
     }
   }
 
- void handleInput() {
-    if (keyPressed) {
-      if (key == 'a' || key == 'A') {
-        x -= speed;
-      } else if (key == 'd' || key == 'D') {
-        x += speed;
-      } else if (key == 'w' || key == 'W') {
-        y -= speed;
-      } else if (key == 's' || key == 'S') {
-        y += speed;
-      } else if (key == ' ') {
-        // スペースキーで攻撃
-        if (!isAttacking) {  // 押しっぱなし対策
-          attack();
-          isAttacking = true;
-        }
-      }
-    } else {
-      isAttacking = false;
+  void handleInput() {
+    if (keyPressed && key == ' ') {
+      attack();
     }
+  }
+
+  void display() {
+    if (img != null) {
+      image(img, x, y, size, size);
+    } else {
+      fill(0, 255, 0);
+      rect(x, y, size, size);
+    }
+    displayBullets();
+  }
+
+  boolean isHit(Bullet b) {
+    return b.x > x && b.x < x + size && b.y > y && b.y < y + size;
   }
 }

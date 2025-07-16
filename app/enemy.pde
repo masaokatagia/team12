@@ -35,29 +35,33 @@ class enemy extends charactor {
   }
 
   void updateBullets() {
-    for (int i = bullets.size() - 1; i >= 0; i--) {
-      Bullet b = bullets.get(i);
-      b.shoot();
+  for (int i = bullets.size() - 1; i >= 0; i--) {
+    Bullet b = bullets.get(i);
+    b.shoot();
 
-//      if (target.isHit(b)) {
-//        target.HP -= 10;
-//        println("Player hit! HP: " + target.HP);
-//        bullets.remove(i);
-//        continue;
-//     }
+    // 敵に当たったらダメージ
+    if (target.isHit(b)) {
+      target.HP -= 10;
+      println("Enemy hit! HP: " + target.HP);
+      bullets.remove(i);
+      continue;
+    }
 
-      if (b.isOffScreen()) {
-        bullets.remove(i);
-      }
+    if (b.isOffScreen()) {
+      bullets.remove(i);
     }
   }
+}
+
 
   void display() {
-    image(img, x, y, size, size);
-    for (Bullet b : bullets) {
-      b.display();
-    }
+  if (HP <= 0) return; // HP 0なら表示しない
+  image(img, x, y, size, size);
+  for (Bullet b : bullets) {
+    b.display();
   }
+}
+
 
   boolean isHit(Bullet b) {
     return b.x > x && b.x < x + size && b.y > y && b.y < y + size;
