@@ -22,8 +22,8 @@ class enemy extends charactor {
 
   @Override
   void walk() {
-    if (target.x > x) x += speed;
-    if (target.x < x) x -= speed;
+    if (target.y > y) y += speed;
+    if (target.y < y) y -= speed;
   }
 
   @Override

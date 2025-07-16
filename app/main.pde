@@ -1,6 +1,7 @@
 Stage stage;
 Player player;
 enemy enemy1;
+Boss boss;
 PImage enemyBulletImg;
 
 void setup() {
@@ -15,6 +16,7 @@ void setup() {
 
   // 敵の生成
   enemy1 = new enemy(100, 100, player, enemyBulletImg);
+  boss = new Boss(100, 100, player);
 }
 
 void draw() {

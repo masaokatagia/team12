@@ -19,7 +19,6 @@ class charactor {
 
     // 歩く
     void walk() {
-        x += speed;
     }
 
     // 攻撃
