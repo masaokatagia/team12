@@ -1,24 +1,32 @@
-jiki player;
-enemy e1;
-BOSS boss1;
+Stage stage;
+Player player;
+enemy enemy1;
+PImage enemyBulletImg;
 
 void setup() {
   size(800, 600);
-  player = new jiki(400, 500);
-  e1 = new enemy(100, 100, player);
-  boss1 = new Boss(300, 100, player);
+  stage = new Stage("background.png", "obstacle.png");
+
+  // プレイヤー（仮）
+  player = new Player(400, 500);
+
+  // 弾画像の読み込み
+  enemyBulletImg = loadImage("bullet1.png");
+
+  // 敵の生成
+  enemy1 = new enemy(100, 100, player, enemyBulletImg);
 }
 
 void draw() {
-  background(255);
+  stage.drawBackstage();
+
   player.walk();
   player.display();
 
-  e1.walk();
-  e1.attack();
-  e1.display();
+  enemy1.walk();
+  enemy1.attack();
+  enemy1.updateBullets();
+  enemy1.display();
 
-  boss1.walk();
-  boss1.attack();
-  boss1.display();
+  stage.drawStage(); // 障害物など前景の描画
 }

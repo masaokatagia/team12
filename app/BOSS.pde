@@ -1,9 +1,9 @@
-class Boss extends charactor {
+class Boss extends Character {
   int size;
-  jiki target;
+  Player target;
   PImage img;
 
-  Boss(int x, int y, jiki target) {
+  Boss(int x, int y, Player target) {
     super(200, 3, 2, 20, 1, x, y);
     this.size = 64;
     this.target = target;
