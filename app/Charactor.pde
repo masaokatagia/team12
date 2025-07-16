@@ -1,4 +1,4 @@
-class Charactor {
+class charactor {
     int HP;             // 体力
     int bulletSpeed;    // 弾の速度
     int weapon;         // 武器
