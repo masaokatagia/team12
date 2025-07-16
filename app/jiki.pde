@@ -1,7 +1,7 @@
 class Player extends charactor {
   PImage img;
 
-  jiki(int x, int y) {
+  Player(int x, int y) {
     super(100, 6, 3, 15, 4, x, y);
   }
 

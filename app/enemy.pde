@@ -1,4 +1,4 @@
-class enemy extends Character {
+class enemy extends charactor {
   int size;
   Player target;
   PImage img;

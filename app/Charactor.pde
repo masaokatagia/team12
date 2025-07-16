@@ -7,7 +7,7 @@ class charactor {
     int x;              // X座標
     int y;              // Y座標
 
-    Charactor(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y) {
+    charactor(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y) {
         this.HP = HP;
         this.bulletSpeed = bulletSpeed;
         this.weapon = weapon;
@@ -35,4 +35,3 @@ class charactor {
     void loadIMG() {
     }
 }
-
