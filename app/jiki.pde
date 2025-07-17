@@ -37,6 +37,7 @@ class Player extends charactor {
        println("Player hit! HP: " + boss.HP);
         bullets.remove(i);
         continue;
+     }
     }
   }
 
@@ -105,5 +106,4 @@ class Player extends charactor {
   boolean isHit(Bullet b) {
     return b.x > x && b.x < x + size && b.y > y && b.y < y + size;
   }
-}
 }

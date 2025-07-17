@@ -69,7 +69,11 @@ class Boss extends charactor {
 
 
   boolean display() {
-    if (HP <= 0) return false;
+    if (HP <= 0)
+    {
+      stageCount = 2;
+     return false;
+    }
     image(img, x, y, size, size);
 
     if (isFiring) {

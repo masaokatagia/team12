@@ -45,14 +45,14 @@ void draw() {
         enemy1.updateBullets();
         enemy1.display();
     }
-    else{
+    else if (stageCount == 1) {
         boss.walk();
         boss.attack();
         boss.updateLaser();
         boss_hp = boss.display();
-        if (boss_hp == false) {
-            text("YOU WIN", 300, 200);
-            }
-        }
-    
     }
+    else {
+        text("YOU WIN", 300, 200);
+    }
+    
+}
