@@ -7,8 +7,8 @@ class enemy extends charactor {
   int fireInterval = 60;
   int lastShotFrame = 0;
 
-  enemy(int x, int y, Player target, PImage bulletImg) {
-    super(50, 4, 1, 10, 2, x, y);
+  enemy(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y, Player target, PImage bulletImg) {
+    super(HP, bulletSpeed, weapon, ap, speed, x, y);
     this.size = 32;
     this.target = target;
     this.bulletImg = bulletImg;
@@ -29,7 +29,7 @@ class enemy extends charactor {
   @Override
   void attack() {
     if (frameCount - lastShotFrame > fireInterval) {
-      bullets.add(new Bullet(x + size / 2, y + size / 2, 3, bulletImg));
+      bullets.add(new Bullet(x + size / 2, y + size / 2, -bulletSpeed, bulletImg));
       lastShotFrame = frameCount;
     }
   }
@@ -41,9 +41,8 @@ class enemy extends charactor {
 
     // 敵に当たったらダメージ
     if (target.isHit(b)) {
-      target.HP -= 10;
+      target.HP -= this.ap;
       println("Enemy hit! HP: " + target.HP);
-      stageCount = 1;
       bullets.remove(i);
       continue;
     }
@@ -54,9 +53,12 @@ class enemy extends charactor {
   }
 }
 
-
   void display() {
-  if (HP <= 0) return; // HP 0なら表示しない
+  if (this.HP <= 0) 
+  {
+    stageCount = 1;
+    return; // HP 0なら表示しない
+  }
   image(img, x, y, size, size);
   for (Bullet b : bullets) {
     b.display();
@@ -64,7 +66,15 @@ class enemy extends charactor {
 }
 
 
+
   boolean isHit(Bullet b) {
-    return b.x > x && b.x < x + size && b.y > y && b.y < y + size;
-  }
+  float bw = b.img.width;
+  float bh = b.img.height;
+  float bx = b.x - bw / 2;
+  float by = b.y - bh / 2;
+
+  return bx + bw > x && bx < x + size &&
+         by + bh > y && by < y + size;
+}
+
 }

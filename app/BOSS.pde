@@ -7,9 +7,11 @@ class Boss extends charactor {
   int laserDuration = 30;  // レーザー表示時間（フレーム数）
   int lastShotFrame = -9999;
   boolean isFiring = false;
-
-  Boss(int x, int y, Player target) {
-    super(100, 0, 0, 30, 1, x, y);
+  int lastDamageFrame = 0;
+  int damageCooldown = 30; // 30フレームごとにダメージ（0.5秒）
+       
+  Boss(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y, Player target) {
+    super(HP, bulletSpeed, weapon, ap, speed, x, y);
     this.size = 64;
     this.target = target;
     loadIMG();
@@ -34,7 +36,7 @@ class Boss extends charactor {
       lastShotFrame = frameCount;
     }
   }
-
+/*
   void updateLaser() {
     // レーザーの有効時間が過ぎたら終了
     if (isFiring && frameCount - lastShotFrame > laserDuration) {
@@ -48,15 +50,28 @@ class Boss extends charactor {
         println("Player hit by laser! HP: " + target.HP);
       }
     }
-  }
+  }*/
+  boolean isLaserHit(Player target) {
+  float laserTop = y + size / 2 - 5;
+  float laserBottom = y + size / 2 + 5;
+  float targetLeft = target.x;
+  float targetRight = target.x + target.size;
+  float targetTop = target.y;
+  float targetBottom = target.y + target.size;
 
-  void display() {
-    if (HP <= 0) return;
+  // 縦方向がレーザー範囲内かつ、横方向がレーザーの範囲（0〜x）に入っている
+  return targetBottom > laserTop && targetTop < laserBottom &&
+         targetRight > 0 && targetLeft < x;
+}
+
+  boolean display() {
+    if (HP <= 0) return false;
     image(img, x, y, size, size);
 
     if (isFiring) {
       displayLaser();
     }
+    return true;
   }
 
 void displayLaser() {
@@ -70,8 +85,6 @@ void displayLaser() {
 
   image(laserImg, laserX, laserY, laserWidth, laserHeight);
 }
-
-
 
   boolean isHit(Bullet b) {
     return b.x > x && b.x < x + size && b.y > y && b.y < y + size;
