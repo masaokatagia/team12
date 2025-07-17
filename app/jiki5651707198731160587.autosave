@@ -4,11 +4,9 @@ class Player extends charactor {
   int size = 50;
   ArrayList<Bullet> bullets;
   boolean isAttacking = false;
-  float vy = 0;        
-  float gravity = 1.0;  
   boolean isJumping = false;
-
-
+  float vy = 0;
+  float gravity = 1.0;
 
 
   Player(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y, PImage bulletImg) {
@@ -37,14 +35,8 @@ class Player extends charactor {
         bullets.remove(i);
         continue;
      }
-     if (boss.isHit(b) && boss.HP > 0) {
-        boss.HP -= this.ap;
-       println("Player hit! HP: " + boss.HP);
-        bullets.remove(i);
-        continue;
     }
   }
-}
 
   void displayBullets() {
     for (Bullet b : bullets) {
@@ -66,16 +58,15 @@ class Player extends charactor {
         isJumping = true;
       }
     }
-    
     vy += gravity;
     y += vy;
-    
     int groundY = getGroundY(x);
-    if(y >= groundY - size){
-       y = groundY - size;
-      vy = 0;
-      isJumping = false;
+  if (y >= groundY - size) {
+    y = groundY - size;
+    vy = 0;
+    isJumping = false;
   }
+    
     x = constrain(x, 0, width - size);
 
   }
@@ -84,7 +75,7 @@ class Player extends charactor {
   if (px < 60) return 300;
   if (px > 440) return 600;
 
-  return (int)(0.8 * px + 250);
+  return (int)(0.75 * px + 240);
 }
 
   void handleInput() {
