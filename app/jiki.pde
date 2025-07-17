@@ -53,7 +53,18 @@ class Player extends charactor {
       if (key == 'w') y -= speed;
       if (key == 's') y += speed;
     }
+    x = constrain(x, 0, width - size);
+
+    // 台の傾きに沿ってy座標を調整
+    y = getGroundY(x) - size;
   }
+ int  getGroundY(int px) {
+  // 台の範囲外では固定
+  if (px < 60) return 300;
+  if (px > 440) return 600;
+
+  return (int)(0.75 * px + 240);
+}
 
   void handleInput() {
   if (keyPressed) {

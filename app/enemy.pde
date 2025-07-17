@@ -4,7 +4,7 @@ class enemy extends charactor {
   PImage img;
   PImage bulletImg;
   ArrayList<Bullet> bullets;
-  int fireInterval = 60;
+  int fireInterval = 30;
   int lastShotFrame = 0;
 
   enemy(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y, Player target, PImage bulletImg) {

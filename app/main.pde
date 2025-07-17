@@ -14,14 +14,14 @@ void setup() {
     jikiBulletImg = loadImage("bullet1.png");
     
     //プレイヤー（仮）
-    player = new Player(100, 6, 3, 15, 4, 100, 100, jikiBulletImg);
+    player = new Player(100, 6, 3, 15, 4, 100, 0, jikiBulletImg);
     
     //弾画像の読み込み
     enemyBulletImg = loadImage("bullet1.png");
     
     //敵の生成
-    enemy1 = new enemy(50, 4, 1, 10, 2, 400, 500, player, enemyBulletImg);
-    boss = new Boss(50, 4, 1, 10, 2, 400, 500, player);
+    enemy1 = new enemy(50, 4, 1, 10, 2, 700, 500, player, enemyBulletImg);
+    boss = new Boss(50, 4, 1, 10, 2, 700, 500, player);
 }
 
 void draw() {
@@ -48,6 +48,7 @@ void draw() {
     else{
         boss.walk();
         boss.attack();
+        boss.updateLaser();
         boss_hp = boss.display();
         if (boss_hp == false) {
             text("YOU WIN", 300, 200);
