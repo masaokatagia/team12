@@ -63,7 +63,7 @@ class Player extends charactor {
   if (px < 60) return 300;
   if (px > 440) return 600;
 
-  return (int)(0.75 * px + 240);
+  return (int)(0.8 * px + 250);
 }
 
   void handleInput() {
