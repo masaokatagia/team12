@@ -106,3 +106,4 @@ class Player extends charactor {
     return b.x > x && b.x < x + size && b.y > y && b.y < y + size;
   }
 }
+}
