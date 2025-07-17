@@ -25,7 +25,7 @@ void setup() {
     //敵の生成
     //hp, bulletspeed, weapon, ap, speed, x, y
     enemy1 = new enemy(50, 4, 1, 10, 2, 700, 500, player, enemyBulletImg);
-    boss = new Boss(50, 4, 1, 3, 2, 700, 500, player);
+    boss = new Boss(50, 4, 1, 1, 2, 700, 500, player);
 }
 
 void draw() {
@@ -36,7 +36,7 @@ void draw() {
     jiki_hp = player.display();
     if (jiki_hp == false) {
         textFont(font, 100);
-        text("You Died.",200, 200);
+        text("You Died.",400, 200);
         return;
     }
     player.handleInput();
@@ -57,8 +57,7 @@ void draw() {
     }
     else {
         textFont(font, 30);
-        //text("お前の勝ち\nなんで勝ったか明日までに考えといてください", 100, 200);
-        text("YOU WIN", 200, 300);
+        text("お前の勝ち\nなんで勝ったか明日までに考えといてください", 100, 200);
     }
     
 }

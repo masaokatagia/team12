@@ -4,6 +4,11 @@ class Player extends charactor {
   int size = 50;
   ArrayList<Bullet> bullets;
   boolean isAttacking = false;
+  float vy = 0;        
+  float gravity = 1.0;  
+  boolean isJumping = false;
+
+
 
 
   Player(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y, PImage bulletImg) {
@@ -41,6 +46,7 @@ class Player extends charactor {
     }
   }
 
+
   void displayBullets() {
     for (Bullet b : bullets) {
       b.display();
@@ -53,16 +59,17 @@ class Player extends charactor {
   }
 
   void walk() {
-    if (keyPressed) {
-      if (key == 'a') x -= speed;
-      if (key == 'd') x += speed;
-      if (key == 'w') y -= speed;
-      if (key == 's') y += speed;
-    }
-    x = constrain(x, 0, width - size);
+    vy += gravity;
+    y += vy;
 
-    // 台の傾きに沿ってy座標を調整
-    y = getGroundY(x) - size;
+    int groundY = getGroundY(x);
+    if (y >= groundY - size) {
+      y = groundY - size;
+      vy = 0;
+      isJumping = false;
+    }
+
+    x = constrain(x, 0, width - size);
   }
  int  getGroundY(int px) {
   // 台の範囲外では固定
@@ -76,8 +83,10 @@ class Player extends charactor {
   if (keyPressed) {
     if (key == 'a') x -= speed;
     if (key == 'd') x += speed;
-    if (key == 'w') y -= speed;
-    if (key == 's') y += speed;
+    if (key == 'w' && !isJumping) {
+      vy = -15;
+      isJumping = true;
+    }
     if (key == ' ') {
       if (!isAttacking) {
         attack();
@@ -88,6 +97,7 @@ class Player extends charactor {
     isAttacking = false;
   }
 }
+
 
   boolean display() {
     if (HP <= 0) {

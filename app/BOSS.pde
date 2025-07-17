@@ -4,11 +4,12 @@ class Boss extends charactor {
   PImage img;
   PImage laserImg;
   int fireInterval = 180;  // レーザー発射間隔（例: 3秒）
-  int laserDuration = 120;  // レーザー表示時間（フレーム数）
+  int laserDuration = 600;  // レーザー表示時間（フレーム数）
   int lastShotFrame = -9999;
   boolean isFiring = false;
   int lastDamageFrame = 0;
   int damageCooldown = 6; // 30フレームごとにダメージ（0.5秒）
+  float laserHitboxHeight = 10; 
        
   Boss(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y, Player target) {
     super(HP, bulletSpeed, weapon, ap, speed, x, y);
@@ -47,8 +48,8 @@ class Boss extends charactor {
   if (isFiring) {
     float laserLeft = 0;
     float laserRight = x;
-    float laserTop = y + size / 2 - laserImg.height / 2;
-    float laserBottom = y + size / 2 + laserImg.height / 2;
+    float laserTop = y + size / 2 - laserHitboxHeight / 2;
+      float laserBottom = y + size / 2 + laserHitboxHeight / 2;
 
     float targetLeft = target.x;
     float targetRight = target.x + target.size;
