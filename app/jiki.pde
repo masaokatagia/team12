@@ -32,6 +32,11 @@ class Player extends charactor {
         bullets.remove(i);
         continue;
      }
+     if (boss.isHit(b) && boss.HP > 0) {
+        boss.HP -= this.ap;
+       println("Player hit! HP: " + boss.HP);
+        bullets.remove(i);
+        continue;
     }
   }
 
