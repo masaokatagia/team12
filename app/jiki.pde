@@ -1,4 +1,4 @@
-class Player extends charactor {
+class Player extends Character {
   PImage img;
   PImage bulletImg;
   int size = 50;

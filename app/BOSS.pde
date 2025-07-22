@@ -1,4 +1,4 @@
-class Boss extends charactor {
+class Boss extends Character {
   int size;
   Player target;
   float hitboxOffsetX = 10;  // 画像の左端からのズレ（X方向）

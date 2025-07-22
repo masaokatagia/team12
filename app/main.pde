@@ -1,6 +1,6 @@
 Stage stage;
 Player player;
-public enemy enemy1;
+public Enemy enemy1;
 public Boss boss;
 public int stageCount = 0;
 boolean jiki_hp, enemy_hp, boss_hp;
@@ -24,7 +24,7 @@ void setup() {
     
     //敵の生成
     //hp, bulletspeed, weapon, ap, speed, x, y
-    enemy1 = new enemy(50, 4, 1, 10, 2, 700, 500, player, enemyBulletImg);
+    enemy1 = new Enemy(50, 4, 1, 10, 2, 700, 500, player, enemyBulletImg);
     boss = new Boss(50, 4, 1, 3, 2, 700, 500, player);
 }
 

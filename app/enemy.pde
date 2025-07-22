@@ -1,4 +1,4 @@
-class enemy extends charactor {
+class Enemy extends Character {
   int size;
   Player target;
   PImage img;
@@ -7,7 +7,7 @@ class enemy extends charactor {
   int fireInterval = 30;
   int lastShotFrame = 0;
 
-  enemy(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y, Player target, PImage bulletImg) {
+  Enemy(int HP, int bulletSpeed, int weapon, int ap, int speed, int x, int y, Player target, PImage bulletImg) {
     super(HP, bulletSpeed, weapon, ap, speed, x, y);
     this.size = 32;
     this.target = target;
