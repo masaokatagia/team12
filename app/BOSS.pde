@@ -1,6 +1,10 @@
 class Boss extends charactor {
   int size;
   Player target;
+  float hitboxOffsetX = 10;  // 画像の左端からのズレ（X方向）
+  float hitboxOffsetY = 15;  // 画像の上端からのズレ（Y方向）
+  float hitboxWidth   = 44;  // 当たり判定の幅
+  float hitboxHeight  = 40;  // 当たり判定の高さ
   PImage img;
   PImage laserImg;
   int fireInterval = 180;  // レーザー発射間隔（例: 3秒）
@@ -96,6 +100,12 @@ void displayLaser() {
 
 
   boolean isHit(Bullet b) {
-    return b.x > x && b.x < x + size && b.y > y && b.y < y + size;
-  }
+  // 当たり判定の実際の座標を計算
+  float hitboxX = this.x + this.hitboxOffsetX;
+  float hitboxY = this.y + this.hitboxOffsetY;
+
+  // 弾が当たり判定の範囲内にあるかチェック
+  return b.x > hitboxX && b.x < hitboxX + this.hitboxWidth &&
+         b.y > hitboxY && b.y < hitboxY + this.hitboxHeight;
+}
 }

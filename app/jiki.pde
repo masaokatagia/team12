@@ -50,6 +50,7 @@ class Player extends charactor {
   void displayBullets() {
     for (Bullet b : bullets) {
       b.display();
+
     }
   }
 
@@ -69,7 +70,7 @@ class Player extends charactor {
       isJumping = false;
     }
 
-    x = constrain(x, 0, width - size);
+    x = constrain(x, 0, 650);
   }
  int  getGroundY(int px) {
   // 台の範囲外では固定

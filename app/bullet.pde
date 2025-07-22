@@ -15,7 +15,7 @@ class Bullet {
   }
 
  void display() {
-    image(img, x, y);  
+     image(img, x - img.width / 2, y - img.height / 2);
   }
   
 boolean isOffScreen() {

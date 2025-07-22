@@ -56,7 +56,7 @@ void draw() {
         boss_hp = boss.display();
     }
     else {
-        textFont(font, 30);
+        textFont(font, 100);
         //text("お前の勝ち\nなんで勝ったか明日までに考えといてください", 100, 200);
         text("YOU WIN", 200, 300);
     }
